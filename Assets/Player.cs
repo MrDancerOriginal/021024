@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
 
     private NavMeshAgent agent;
-
+    public Animator Animator;
 
     void Start()
     {
@@ -24,14 +24,7 @@ public class Player : MonoBehaviour
         //    Що буде відбуватись, якщо умова є правдивою
         //}
 
-        var randomNumber = Random.Range(1, 100);
-
-        if (randomNumber > 50)
-        {
-            Debug.Log("Число більше 50");
-        }
-
-        Debug.Log(randomNumber);
+        
 
     }
     void Update()
@@ -46,8 +39,18 @@ public class Player : MonoBehaviour
         }
 
 
+        if(agent.velocity.magnitude < 1)
+        {
+            //Анімація стояння
+            Animator.SetBool("isWalk", false);
+        }
+        
+        if(agent.velocity.magnitude > 1 ) 
+        {
+            //Анімація ходіння
+            Animator.SetBool("isWalk", true);
+        }
 
-
-        //Debug.Log(agent.velocity.magnitude);
+        Debug.Log(agent.velocity.magnitude);
     }
 }
